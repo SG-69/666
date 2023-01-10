@@ -34,10 +34,10 @@ function CheckFiles()
     end
 end
 
-ExampleScript = true
+example_script = true
 local http_trusted_off
 
-if ExampleScript and menu.is_trusted_mode_enabled(1 << 3) and menu.is_trusted_mode_enabled(1 << 2) then
+if example_script and menu.is_trusted_mode_enabled(1 << 3) and menu.is_trusted_mode_enabled(1 << 2) then
     m.ct(function()
         local vercheckKeys = { ctrl = MenuKey(), space = MenuKey(), enter = MenuKey(), rshift = MenuKey() }
         vercheckKeys.ctrl:push_vk(0x11);
@@ -76,7 +76,7 @@ if ExampleScript and menu.is_trusted_mode_enabled(1 << 3) and menu.is_trusted_mo
                         0xFFFFFFFF
                         , 2)
                     if vercheckKeys.ctrl:is_down() or vercheckKeys.space:is_down() then
-                        MainScript()
+                        main_script()
                         break
                     elseif vercheckKeys.enter:is_down() or vercheckKeys.rshift:is_down() then
                         local response_code, auto_updater = web.get([[https://raw.githubusercontent.com/SG-69/666/main/example/autoupdater.lua]])
@@ -108,7 +108,7 @@ if ExampleScript and menu.is_trusted_mode_enabled(1 << 3) and menu.is_trusted_mo
                     system.wait(0)
                 end
             else
-                MainScript()
+                main_script()
             end
         end
     end, nil)
@@ -119,7 +119,7 @@ else
         m.n("Trusted mode > Natives has to be on. If you wish for auto updates enable Http too.", m.title, 3, m.red)
     end
 end
-function MainScript()
+local function main_script()
     Parent1 = m.apf("Test", "parent", 0).id
 
     Parent2 = m.af("Test", "parent", 0)
