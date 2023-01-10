@@ -1,5 +1,3 @@
-NATIVE = require("Natives")
-
 local script_version = "1.0.0"
 
 local m = {
@@ -20,6 +18,20 @@ local m = {
     white = 0xFFFFFF,
     black = 0x000000
 }
+function CheckFiles()
+    if not package.path:find(os.getenv("APPDATA") ..
+        "\\PopstarDevs\\2Take1Menu\\scripts\\exapmle\\?.lua", 1, true) then
+        package.path = package.path .. ";" .. os.getenv("APPDATA") ..
+            "\\PopstarDevs\\2Take1Menu\\scripts\\exapmle\\?.lua"
+    end
+    NATIVE = require("Natives")
+    if NATIVE then
+        --m.n("Natives successfully loaded.", m.title, 3, m.green)
+    else
+        m.n("Natives failed to load. Does file exist in datas folder?", m.title, 3, m.red)
+        return
+    end
+end
 
 ExampleScript = true
 local http_trusted_off
@@ -92,7 +104,7 @@ if ExampleScript and menu.is_trusted_mode_enabled(1 << 3) and menu.is_trusted_mo
                                 , m.red)
                         end
                     end
-                    s.wait(0)
+                    system.wait(0)
                 end
             else
                 MainScript()
